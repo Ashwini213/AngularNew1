@@ -8,7 +8,7 @@ margin-top: 31px;">
    <i>{{OwnerEmailId?.email}} (Owner)</i>
    </div> <br><br> -->
 
-  <div *ngFor="let item of data.collaborators">
+  <!-- <div *ngFor="let item of data.collaborators"> -->
     <div class="collab">
       {{item.name}}
     </div>
@@ -37,6 +37,6 @@ margin-top: 31px;">
       </mat-autocomplete>
     </mat-form-field>
   </form>
-  <mat-divider></mat-divider>
+  <!-- <mat-divider></mat-divider> -->
   <button mat-button [mat-dialog-close]="{'email':newEmail}" style="float:right;margin-right: 46px;">Close</button>
 </div>
