@@ -2,7 +2,7 @@
 
 <div fxLayout="space-around" fxLayoutGap.xs="0" fxLayout.xs="column" fxLayoutGap="20px" fxLayout.gt-xs="row wrap"
   fxLayout="row wrap" class="notegrid" [ngClass]="grid ? 'notegrid-grid-view': 'notegrid-list-view'">
-  <app-pinned-notes [ngClass]="{'card-grid': !view,'card-list': view}" [products]="products| noteFilter:'pinned'"
+  <app-pinned-notes [ngClass]="{'card-grid': !view,'card-list': view}" [products]="products| noteFilter:'ispinned'"
     (refreshEvent)="childStatusChanged($event)"> </app-pinned-notes>
 </div>
 

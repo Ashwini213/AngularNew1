@@ -66,7 +66,7 @@ export class ThrashComponent implements OnInit {
   public onRestore(products) {
     products.intrash = false;
     this.service.updateNote(products, products.id).subscribe(resp => {
-      this.snackBar.open("Successfully restored", "Ok", {
+      this.snackBar.open('Successfully restored', 'Ok', {
         duration: 2000,
       });
     }, (error) => {
@@ -78,7 +78,7 @@ export class ThrashComponent implements OnInit {
   public deletPermanently(note) {
     this.service.delete(note.id).subscribe(result => {
       console.log(result);
-      this.snackBar.open("Deleted permanently", "Ok", {
+      this.snackBar.open('Deleted permanently', 'Ok', {
         duration: 2000,
       });
     }, (error) => {

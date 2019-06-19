@@ -77,13 +77,13 @@ export class PinnedNotesComponent implements OnInit {
     var icon = document.getElementById(products.title);
     if (this.togle) {
       icon.style.background = 'black';
-      products.pinned = true;
+      products.ispinned = true;
       this.snackBar.open('Pinned', 'Ok', {
         duration: 2000,
       });
     }
     else {
-      products.pinned = false;
+      products.ispinned = false;
       icon.style.background = 'white';
       this.snackBar.open('Unpinned', 'Ok', {
         duration: 2000,

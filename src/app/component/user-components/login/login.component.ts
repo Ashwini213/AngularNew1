@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
-    REGEX_EMAIL = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+    REGEX_EMAIL = '[a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?';
     loading = false;
     submitted = false;
     returnUrl: string;
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token', response.headers.get('token'));
             this.router.navigate(['/home']);
         }, (error) => {
-            this.snackBar.open("invalid user details", "Ok", {
+            this.snackBar.open('invalid user details', 'Ok', {
                 duration: 2000,
             }); console.log(error);
         });

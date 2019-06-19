@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
+import { Component, OnInit, Inject, Input, ɵConsole } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
 import { UserService } from 'src/app/core/services/UserService/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -16,7 +16,7 @@ export class CollaboratorDialogBoxComponent implements OnInit {
   @Input() users: User;
   @Input() products;
   picture: any;
-  disc: String;
+  disc: string;
   emails: any[] = [];
   collabUser: [];
   notes: [];
@@ -30,7 +30,7 @@ export class CollaboratorDialogBoxComponent implements OnInit {
   ) { }
 
   public ngOnInit() {
-    var notes = {
+    let notes = {
       ...this.data
     };
     this.getUser();
@@ -48,29 +48,22 @@ export class CollaboratorDialogBoxComponent implements OnInit {
   }
 
   public getUser() {
-    this.userService.getUser().subscribe((resp) => {
+    this.userService.getUser().subscribe((resp: any) => {
       this.users = resp;
-      this.users = {
-        ...resp,
-        image: `data:image/text;base64, ${resp.image}`,
-      };
-      const url = `data:${resp.contentType};base64,${resp.image}`;
-      this.picture = {
-        imageSrc: this.sanitizer.bypassSecurityTrustUrl(url)
-      };
-      console.log(this.picture);
+      console.log(this.users);
     }, (error) => {
       console.log(error);
     });
   }
 
-  public onAddCollab(email, note) {
+  public onAddCollab(note, email) {
     const arry = JSON.stringify(this.data);
-    if (arry.search(email) === -1) {
+   // const result = JSON.parse(arry);
+    if (arry.search(email) == 1) {
+  // if(in_arry.search(email)){}
       this.getCollaboraterId(email).subscribe((resp: any) => {
         this.coUser = resp;
-        const collaboratedUser =
-        {
+        const collaboratedUser = {
           collEmailId: email,
           noteId: note.id,
           ownerId: resp.id
@@ -89,14 +82,14 @@ export class CollaboratorDialogBoxComponent implements OnInit {
         duration: 2000,
       });
     }
+
   }
 
   public deleteCollab(email, note, collId) {
-    let collaboratedUser =
-    {
+    const collaboratedUser = {
       id: collId,
       collEmailId: email,
-      noteId: note.id
+      noteId: note.id 
 
     };
     this.noteService.removeCollab(collaboratedUser).subscribe(resp => {
@@ -107,8 +100,8 @@ export class CollaboratorDialogBoxComponent implements OnInit {
     console.log(this.data);
   }
 
-  public getCollaboraterId(email) {
-    return this.userService.getCollUserId(email);
+  public getCollaboraterId(id) {
+    return this.userService.getCollUserId(id);
   }
 
   public getNoteOwner() {

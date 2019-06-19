@@ -50,10 +50,12 @@ export class NoteSearchComponent implements OnInit {
     });
   }
   public colorChange() {
-    if (this.colorMenu)
+    if (this.colorMenu) {
       this.colorMenu = false;
-    else
+    }
+    else {
       this.colorMenu = true;
+    }
   }
 
  public addColor(color, products) {
@@ -73,14 +75,14 @@ export class NoteSearchComponent implements OnInit {
     this.togle = !this.togle;
     if (this.togle) {
       icon.style.background = 'black';
-      products.pinned = true;
+      products.ispinned = true;
       console.log(products);
       this.snackBar.open('Pinned', 'Ok', {
         duration: 2000,
       });
     }
     else {
-      products.pinned = false;
+      products.ispinned = false;
       icon.style.background = 'white';
       this.snackBar.open('Unpinned', 'Ok', {
         duration: 2000,

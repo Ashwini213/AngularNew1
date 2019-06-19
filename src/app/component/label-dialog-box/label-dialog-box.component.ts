@@ -12,9 +12,9 @@ export class LabelDialogBoxComponent implements OnInit {
   @Input()
   labels: [];
   constructor(public dialog: MatDialog,
-              public dialogRef: MatDialogRef<LabelDialogBoxComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: DialogData, private labelService: LabelService,
-              private snackBar: MatSnackBar) { }
+    public dialogRef: MatDialogRef<LabelDialogBoxComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private labelService: LabelService,
+    private snackBar: MatSnackBar) { }
 
   public ngOnInit() {
     this.labelService.getLabels().subscribe((resp: any) => {
@@ -34,8 +34,8 @@ export class LabelDialogBoxComponent implements OnInit {
       this.snackBar.open('label has been added', 'ok', {
         duration: 2000,
       });
-    })
-      , (error) => {
+    }),
+      (error) => {
         console.log(error);
       };
   }

@@ -73,63 +73,63 @@ export class ArchiveComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.onCloseUpdateNote(note)
+      this.onCloseUpdateNote(note);
     });
   }
 
   public onCloseUpdateNote(note) {
-    console.log(note)
-    this.service.updateNote(note, note.id)
+    console.log(note);
+    this.service.updateNote(note, note.id);
   }
 
   public onUnArchive(products) {
-    products.isarchive = false
+    products.isarchive = false;
     this.service.updateNote(products, products.id).subscribe(resp => {
-      this.snackBar.open("UnArchived", "Ok", {
+      this.snackBar.open('UnArchived', 'Ok', {
         duration: 2000,
       });
     }, (error) => {
-      console.log(error)
-    })
+      console.log(error);
+    });
     this.readAll();
   }
 
   public changeColor(products) {
     var icon = document.getElementById(products.title);
-    this.pinnedIcon = !this.pinnedIcon
+    this.pinnedIcon = !this.pinnedIcon;
     if (this.pinnedIcon) {
-      icon.style.background = "black"
-      products.pinned = true
-      this.snackBar.open("Pinned", "Ok", {
+      icon.style.background = 'black';
+      products.ispinned = true;
+      this.snackBar.open('Pinned', 'Ok', {
         duration: 2000,
       });
 
     }
     else {
-      products.pinned = false
-      icon.style.background = "white"
-      this.snackBar.open("UnPinned", "Ok", {
+      products.ispinned = false;
+      icon.style.background = 'white';
+      this.snackBar.open('UnPinned', 'Ok', {
         duration: 2000,
       });
 
     }
     this.service.updateNote(products, products.id).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     }, (error) => {
-      console.log(error)
-    })
+      console.log(error);
+    });
   }
 
   public onTrash(note) {
-    note.intrash = true
+    note.intrash = true;
     this.service.updateNote(note, note.id).subscribe(resp => {
       console.log(resp);
-      this.snackBar.open("Moved to trash", "Ok", {
+      this.snackBar.open('Moved to trash', 'Ok', {
         duration: 2000,
       });
     }, (error) => {
-      console.log(error)
-    })
+      console.log(error);
+    });
   }
 
   /* dialog box for labels */
@@ -145,7 +145,7 @@ export class ArchiveComponent implements OnInit {
 
   public removeLabel(label, note) {
     this.labelService.removeLabelNote(label, note).subscribe(resp => {
-      this.snackBar.open("Label has been removed", "Ok", {
+      this.snackBar.open('Label has been removed', 'Ok', {
         duration: 2000,
       });
 
@@ -160,15 +160,15 @@ export class ArchiveComponent implements OnInit {
     this.fillTheColor = color;
     products.colore = color;
     this.service.updateNote(products, products.id).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     }, (error) => {
-      console.log(error)
-    })
+      console.log(error);
+    });
     products.colorMenu = 0;
   }
   /*collaborater dialog Box*/
   public onClickDialogBox(products): void {
-    console.log(products)
+    console.log(products);
     const dialogRef = this.dialog.open(CollaboratorDialogBoxComponent, {
       width: '550px',
       data: products
@@ -190,10 +190,10 @@ export class ArchiveComponent implements OnInit {
   public removeReminder(note) {
     note.reminder = null;
     this.service.updateNote(note, note.id).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     }, (error) => {
-      console.log(error)
-    })
+      console.log(error);
+    });
   }
   addImage() {
     this.inputImage = !this.inputImage;
@@ -203,17 +203,17 @@ export class ArchiveComponent implements OnInit {
     note.image = event.target.files[0];
     // this.imagePath = this.note.image;
     var fd = new FormData();
-    fd.append('file', event.target.files[0])
+    fd.append('file', event.target.files[0]);
     this.inputImage = true;
     this.service.uploadNoteImage(fd, note.id).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     }, (error) => {
-      console.log(error)
-    })
+      console.log(error);
+    });
   }
   public transformImage(data) {
     const url = `data:${data.contentType};base64,${data.image}`;
-    return this.sanitizer.bypassSecurityTrustUrl(url)
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
 }

@@ -12,7 +12,6 @@ export interface Tile {
   styleUrls: ['./grid-view.component.css']
 })
 
-
 export class GridViewComponent {
 
     tiles: Tile[] = [

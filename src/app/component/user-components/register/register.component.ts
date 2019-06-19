@@ -33,17 +33,18 @@ export class RegisterComponent implements OnInit {
 
     onSubmit(user) {
         this.submitted = true;
-        this.loading = true;
+        // this.loading = true;
         this.Userservice.register(user).subscribe(response => {
             this.snackBar.open('successfully registered', 'Ok', {
                 duration: 2000,
             });
-            this.router.navigate(['/login']);
+            
         }, (error) => {
             this.snackBar.open('successfully registered', 'Ok', {
                 duration: 2000,
             });
             console.log(error);
         });
+        this.router.navigate(['/login']);
     }
 }

@@ -3,12 +3,12 @@ margin-top: 31px;">
   {{collabUser}}
   <b>Collaborator</b>
   <mat-divider></mat-divider>
-   <div style="margin-left: 111px;"> 
-  <!-- <img class="image" [src]="picture?.imageSrc"> -->
-   <i>{{OwnerEmailId?.email}} (Owner)</i>
-   </div> <br><br> -->
+  <div style="margin-left: 111px;">
+    <!-- <img class="image" [src]="picture?.imageSrc"> | async -->
+    <i>{{OwnerEmailId?.email}} (Owner)</i>
+  </div> <br><br> 
 
-  <!-- <div *ngFor="let item of data.collaborators"> -->
+  <div *ngFor="let item of data.collaborators">
     <div class="collab">
       {{item.name}}
     </div>
@@ -24,19 +24,18 @@ margin-top: 31px;">
   </div>
   <form class="example-form">
     <mat-form-field class="example-full-width" style="    margin-top: -41px;">
-      <input type="text" #search aria-label="Number"
-      name="myControl"
-       matInput [formControl]="myControl" [matAutocomplete]="auto">
+      <input type="text" #search aria-label="Number" name="myControl" matInput [formControl]="myControl"
+        [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of emails" [value]="option">
-          {{option}}
-          <button class="addButton" mat-button (click)="onAddCollab(option,data)">
+        <mat-option *ngFor="let option of users" [value]="option">
+          {{option.email | json}}
+          <button class="addButton" mat-button (click)="onAddCollab(data,option)">
             <span>Add</span>
           </button>
         </mat-option>
       </mat-autocomplete>
     </mat-form-field>
   </form>
-  <!-- <mat-divider></mat-divider> -->
+  <mat-divider></mat-divider>
   <button mat-button [mat-dialog-close]="{'email':newEmail}" style="float:right;margin-right: 46px;">Close</button>
 </div>

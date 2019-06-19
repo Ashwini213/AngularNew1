@@ -1,7 +1,6 @@
 <div *ngIf="products" align="center" >
   <i>Archived Notes are</i>
 </div>
-<h1 >hi</h1>      
 
 <div fxLayout="column" fxLayoutAlign="stretch" align="center">
     <div *ngFor="let products of products| noteFilter:'isarchive'">

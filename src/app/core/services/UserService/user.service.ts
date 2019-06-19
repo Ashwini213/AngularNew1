@@ -12,11 +12,11 @@ export class UserService {
   constructor(private httpUtil: HttputilService) { }
 
   public getHeader() {
-    let token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const httpheaders = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'token': token
+        token: token
       })
     };
     return httpheaders;
@@ -40,8 +40,8 @@ export class UserService {
   }
 
   public getUser(): Observable<any> {
-    let token = localStorage.getItem('token');
-    return this.httpUtil.get(environment.base_url + '/getDetails/', {});
+    const token = localStorage.getItem('token');
+    return this.httpUtil.get(environment.base_url + '/getDetails', {});
   }
 
   public updateUser(user) {
@@ -49,18 +49,17 @@ export class UserService {
   }
 
   public getCollUser() {
-    let token = localStorage.getItem('token');
-    return this.httpUtil.get(environment.base_url + '/get-all-user/' + token, {});
+     const token = localStorage.getItem('token');
+     return this.httpUtil.get(environment.base_url + '/get-all-user' + token , {});
   }
-
 
   public getCollUserId(email) {
-    let header = this.getHeader();
-    return this.httpUtil.get(environment.base_url + '/get-coll-user/' + email, header);
+    const header = this.getHeader();
+    return this.httpUtil.get(environment.base_url + '/get-coll-user' + email, header);
   }
   public getNoteOwner(ownerId) {
-    let token = localStorage.getItem('token');
-    return this.httpUtil.get(environment.base_url + '/get-user-email/' + token, {
+    const token = localStorage.getItem('token');
+    return this.httpUtil.get(environment.base_url + '/get-user-email' + token, {
       params: {
         coUserId: ownerId
       }
