@@ -20,6 +20,9 @@ import { DialogData } from '../archive/archive.component';
   styleUrls: ['./update-notes.component.scss']
 })
 export class UpdateNoteComponent {
+  constructor(public dialog: MatDialog, private userService: UserService, private sanitizer: DomSanitizer,
+    public dialogRef: MatDialogRef<UpdateNoteComponent>, private labelService: LabelService,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private snackBar: MatSnackBar, private service: NoteService, private noteService: NoteService) { }
   @Input() search;
   @Input() view: boolean;
   noteArray: any;
@@ -36,41 +39,38 @@ export class UpdateNoteComponent {
   grid = false;
   panelOpenState: boolean = false;
   submitted = false;
-  colors :string[]=ColorPalets;
-  constructor( public dialog: MatDialog,private userService:UserService, private sanitizer: DomSanitizer,
-    public dialogRef: MatDialogRef<UpdateNoteComponent>,private labelService:LabelService,
-    @Inject(MAT_DIALOG_DATA) public data:DialogData,  private snackBar: MatSnackBar,private service: NoteService, private noteService: NoteService) { }
+  colors: string[] = ColorPalets;
+  discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
+  title = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
   public onNoClick(note, id): void {
     this.dialogRef.close();
     this.service.updateNote(note, id);
   }
-  public updateNote(data) {
-    this.service.updateNote(data, data.id).subscribe(resp=>{
-      console.log(resp);
-    },(error)=>{
-      console.log(error);
-    })
-    this.dialogRef.close();
 
+  public updateNote(data) {
+    this.service.updateNote(data, data.id).subscribe(resp => {
+      console.log(resp);
+    }, (error) => {
+      console.log(error);
+    });
+    this.dialogRef.close();
   }
 
   public onCloseUpdateNote(note) {
     this.noteService.updateNote(note, note.id).subscribe(resp => {
       this.noteArray = resp;
-      this.snackBar.open("note updated", "Ok", {
+      this.snackBar.open('note updated', 'Ok', {
         duration: 2000,
       });
     }, (error) => {
       console.log(error);
-    })
+    });
   }
   public ngOnInit() {
     this.readAll();
     this.getUser();
   }
-  discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
-  title = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
   public togglePanel() {
     this.panelOpenState = !this.panelOpenState;
@@ -92,8 +92,8 @@ export class UpdateNoteComponent {
       console.log(resp);
     }, (error) => {
       console.log(error);
-    })
-    this.snackBar.open("Archived", "Ok", {
+    });
+    this.snackBar.open('Archived', 'Ok', {
       duration: 2000,
     });
   }
@@ -104,11 +104,11 @@ export class UpdateNoteComponent {
       console.log(resp);
     }, (error) => {
       console.log(error);
-    })
-    this.snackBar.open("Moved to trash", "Ok", {
+    });
+    this.snackBar.open('Moved to trash', 'Ok', {
       duration: 2000,
     });
-    this. readAll();
+    this.readAll();
   }
 
   public readAll() {
@@ -121,16 +121,16 @@ export class UpdateNoteComponent {
     var icon = document.getElementById(products.title);
     this.togle = !this.togle;
     if (this.togle) {
-      icon.style.background = "black";
+      icon.style.background = 'black';
       products.ispinned = true;
-      this.snackBar.open("Pinned", "Ok", {
+      this.snackBar.open('Pinned', 'Ok', {
         duration: 2000,
       });
     }
     else {
       products.ispinned = false;
-      icon.style.background = "white"
-      this.snackBar.open("Unpinned", "Ok", {
+      icon.style.background = 'white';
+      this.snackBar.open('Unpinned', 'Ok', {
         duration: 2000,
       });
     }
@@ -139,7 +139,7 @@ export class UpdateNoteComponent {
 
     }, (error) => console.log(error));
   }
-/**LABEL cOMPONENT */
+  /**LABEL cOMPONENT */
   public onClickDialog(products): void {
     const dialogRef = this.dialog.open(LabelDialogBoxComponent, {
       width: '550px',
@@ -151,11 +151,11 @@ export class UpdateNoteComponent {
 
   public removeLabel(label, note) {
     this.labelService.removeLabelNote(label, note).subscribe(resp => {
-      this.snackBar.open("Label removed", "Ok", {
+      this.snackBar.open('Label removed', 'Ok', {
         duration: 2000,
       });
     }, (error) => console.log(error));
-    this.labelService.removeLabelNote(label, note)
+    this.labelService.removeLabelNote(label, note);
     this.readAll();
   }
 
@@ -169,10 +169,10 @@ export class UpdateNoteComponent {
       const url = `data:${resp.contentType};base64,${resp.image}`;
       this.picture = {
         imageSrc: this.sanitizer.bypassSecurityTrustUrl(url)
-      }
+      };
     }, (error) => {
       console.log(error);
-    })
+    });
   }
 
   /*collaborator*/
@@ -188,7 +188,7 @@ export class UpdateNoteComponent {
   }
 
   public colorChange(products) {
-    products.colorMenu=100;
+    products.colorMenu = 100;
   }
 
   public addColor(color, products) {
@@ -198,9 +198,9 @@ export class UpdateNoteComponent {
       console.log(resp);
     }, (error) => {
       console.log(error);
-    })
-    products.colorMenu=100;
-    }
+    });
+    products.colorMenu = 100;
+  }
   /*remainder dialog box*/
   public openRemainder(products): void {
     const dialogRef = this.dialog.open(RemainderComponentComponent, {
@@ -220,6 +220,6 @@ export class UpdateNoteComponent {
       console.log(resp);
     }, (error) => {
       console.log(error);
-    })
+    });
   }
 }

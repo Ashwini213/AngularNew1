@@ -21,8 +21,8 @@ export class NoteCreateComponent implements OnInit {
       title: [''],
       discription: ['']
     });
-    this.readAll()
-  };
+    this.readAll();
+  }
   get f() { return this.createNoteForm.controls; }
 
   public onSubmit(note) {
@@ -33,12 +33,12 @@ export class NoteCreateComponent implements OnInit {
     this.temp = !note.discription;
     this.noteService.save(note).subscribe(resp => {
       console.log(resp);
-      this.snackBar.open("Successfully created", "Ok", {
+      this.snackBar.open('Successfully created', 'Ok', {
         duration: 2000,
       });
     }, (error) => {
       console.log(error);
-    })
+    });
   }
   public readAll() {
     this.noteService.getAll().subscribe((resp: any) => {

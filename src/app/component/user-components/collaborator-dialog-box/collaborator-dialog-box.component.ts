@@ -25,8 +25,8 @@ export class CollaboratorDialogBoxComponent implements OnInit {
   noteOwner: string;
   collaboratedUser: Collaborator;
   constructor(public dialog: MatDialog, private sanitizer: DomSanitizer, private noteService: NoteService,
-              public dialogRef: MatDialogRef<CollaboratorDialogBoxComponent>, private userService: UserService,
-              @Inject(MAT_DIALOG_DATA) public data, private snackBar: MatSnackBar
+    public dialogRef: MatDialogRef<CollaboratorDialogBoxComponent>, private userService: UserService,
+    @Inject(MAT_DIALOG_DATA) public data, private snackBar: MatSnackBar
   ) { }
 
   public ngOnInit() {
@@ -58,9 +58,9 @@ export class CollaboratorDialogBoxComponent implements OnInit {
 
   public onAddCollab(note, email) {
     const arry = JSON.stringify(this.data);
-   // const result = JSON.parse(arry);
-    if (arry.search(email) == 1) {
-  // if(in_arry.search(email)){}
+    // const result = JSON.parse(arry);
+    if (arry.search(email) == -1) {
+      // if(in_arry.search(email)){}
       this.getCollaboraterId(email).subscribe((resp: any) => {
         this.coUser = resp;
         const collaboratedUser = {
@@ -82,14 +82,13 @@ export class CollaboratorDialogBoxComponent implements OnInit {
         duration: 2000,
       });
     }
-
   }
 
   public deleteCollab(email, note, collId) {
     const collaboratedUser = {
       id: collId,
       collEmailId: email,
-      noteId: note.id 
+      noteId: note.id
 
     };
     this.noteService.removeCollab(collaboratedUser).subscribe(resp => {

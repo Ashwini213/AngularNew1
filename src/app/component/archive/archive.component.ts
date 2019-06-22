@@ -40,8 +40,8 @@ export class ArchiveComponent implements OnInit {
   submitted = false;
 
   constructor(private labelService: LabelService,
-     private service: NoteService, private dialog: MatDialog,private sanitizer: DomSanitizer,
-    private snackBar: MatSnackBar) { }
+              private service: NoteService, private dialog: MatDialog,private sanitizer: DomSanitizer,
+              private snackBar: MatSnackBar) { }
 
   public ngOnInit() {
     this.readAll();

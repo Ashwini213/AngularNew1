@@ -16,7 +16,7 @@ export class HttputilService {
   postWithBody(url,object,header){
     return this.http.post<any>(url,object,header);
   }
-  
+
   put(url,object,header){
     return this.http.put<any>(url,object,header);
   }

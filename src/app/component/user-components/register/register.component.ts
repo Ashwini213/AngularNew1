@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
             this.snackBar.open('successfully registered', 'Ok', {
                 duration: 2000,
             });
-            
+
         }, (error) => {
             this.snackBar.open('successfully registered', 'Ok', {
                 duration: 2000,

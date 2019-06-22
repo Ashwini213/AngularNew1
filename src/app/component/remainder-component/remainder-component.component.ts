@@ -9,11 +9,11 @@ import { NoteService } from 'src/app/core/services/NoteService/note.service';
   styleUrls: ['./remainder-component.component.css']
 })
 export class RemainderComponentComponent implements OnInit {
-  note: Note
+  note: Note;
   constructor(public dialog: MatDialog,
-    public dialogRef: MatDialogRef<RemainderComponentComponent>, private noteService: NoteService,
-    @Inject(MAT_DIALOG_DATA) public data,
-    private snackBar: MatSnackBar) { }
+              public dialogRef: MatDialogRef<RemainderComponentComponent>, private noteService: NoteService,
+              @Inject(MAT_DIALOG_DATA) public data,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }
@@ -21,10 +21,10 @@ export class RemainderComponentComponent implements OnInit {
     this.note = this.data;
     this.note.reminder = remainder.selected;
     this.noteService.updateNote(this.note, this.note.id).subscribe(resp => {
-      this.snackBar.open("Remainder has been Set", "Ok", {
+      this.snackBar.open('Remainder has been Set', 'Ok', {
         duration: 2000,
       });
-    }, (error) => { console.log(error) });
+    }, (error) => { console.log(error); });
   }
 }
 
