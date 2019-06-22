@@ -19,6 +19,7 @@ margin-top: 31px;">
           close
         </i>
       </div>
+     
     </div>
     <mat-divider></mat-divider>
   </div>
@@ -27,13 +28,16 @@ margin-top: 31px;">
       <input type="text" #search aria-label="Number" name="myControl" matInput [formControl]="myControl"
         [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let option of users" [value]="option">
+        <mat-select>
+        <mat-option *ngFor="let option of users" [value]="option.email">
           {{option.email | json}}
-          <button class="addButton" mat-button (click)="onAddCollab(data,option)">
-            <span>Add</span>
-          </button>
+          <div fxLayout='row' fxLayoutAlign='end start' >
+              <mat-icon style="cursor: pointer" (click)='addUserEmail(option)'>done</mat-icon>
+            </div>
         </mat-option>
+      </mat-select>
       </mat-autocomplete>
+  
     </mat-form-field>
   </form>
   <mat-divider></mat-divider>

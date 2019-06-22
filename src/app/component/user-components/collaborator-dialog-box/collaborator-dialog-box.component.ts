@@ -24,6 +24,7 @@ export class CollaboratorDialogBoxComponent implements OnInit {
   coUser: User;
   noteOwner: string;
   collaboratedUser: Collaborator;
+  collaboratorArray =[];
   constructor(public dialog: MatDialog, private sanitizer: DomSanitizer, private noteService: NoteService,
     public dialogRef: MatDialogRef<CollaboratorDialogBoxComponent>, private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data, private snackBar: MatSnackBar
@@ -57,6 +58,8 @@ export class CollaboratorDialogBoxComponent implements OnInit {
   }
 
   public onAddCollab(note, email) {
+    console.log('collab note ', note  , 'collab email', email);
+    
     const arry = JSON.stringify(this.data);
     // const result = JSON.parse(arry);
     if (arry.search(email) == -1) {
@@ -111,4 +114,13 @@ export class CollaboratorDialogBoxComponent implements OnInit {
       console.log(error);
     });
   }
+
+  addUserEmail(option){
+    console.log('option ', option);
+    this.collaboratorArray.push(option.email);
+  
+     console.log('collaborator array---- ', this.collaboratorArray);
+    
+  }
+ 
 }

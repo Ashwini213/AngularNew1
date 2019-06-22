@@ -50,16 +50,16 @@ export class UserService {
 
   public getCollUser() {
      const token = localStorage.getItem('token');
-     return this.httpUtil.get(environment.base_url + '/get-all-user' + token , {});
+     return this.httpUtil.get(environment.base_url + '/get-all-user/' + token , {});
   }
 
   public getCollUserId(email) {
     const header = this.getHeader();
-    return this.httpUtil.get(environment.base_url + '/get-coll-user' + email, header);
+    return this.httpUtil.get(environment.base_url + '/get-coll-user/' + email, header);
   }
   public getNoteOwner(ownerId) {
     const token = localStorage.getItem('token');
-    return this.httpUtil.get(environment.base_url + '/get-user-email' + token, {
+    return this.httpUtil.get(environment.base_url + '/get-user-email/' + token, {
       params: {
         coUserId: ownerId
       }
