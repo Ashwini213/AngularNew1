@@ -24,16 +24,19 @@ export class CollaboratorDialogBoxComponent implements OnInit {
   coUser: User;
   noteOwner: string;
   collaboratedUser: Collaborator;
-  collaboratorArray =[];
+  collaboratorArray = [];
+  colArray = [];
   constructor(public dialog: MatDialog, private sanitizer: DomSanitizer, private noteService: NoteService,
-    public dialogRef: MatDialogRef<CollaboratorDialogBoxComponent>, private userService: UserService,
-    @Inject(MAT_DIALOG_DATA) public data, private snackBar: MatSnackBar
+              public dialogRef: MatDialogRef<CollaboratorDialogBoxComponent>, private userService: UserService,
+              @Inject(MAT_DIALOG_DATA) public data, private snackBar: MatSnackBar
   ) { }
 
   public ngOnInit() {
-    let notes = {
+    const notes = {
       ...this.data
     };
+    console.log('notes', notes);
+
     this.getUser();
     this.userService.getCollUser().subscribe((resp: any) => {
       this.emails = resp;
@@ -58,11 +61,11 @@ export class CollaboratorDialogBoxComponent implements OnInit {
   }
 
   public onAddCollab(note, email) {
-    console.log('collab note ', note  , 'collab email', email);
-    
+    console.log('collab note ', note, 'collab email', email);
+
     const arry = JSON.stringify(this.data);
     // const result = JSON.parse(arry);
-    if (arry.search(email) == -1) {
+    if (arry.search(email) === -1) {
       // if(in_arry.search(email)){}
       this.getCollaboraterId(email).subscribe((resp: any) => {
         this.coUser = resp;
@@ -71,7 +74,8 @@ export class CollaboratorDialogBoxComponent implements OnInit {
           noteId: note.id,
           ownerId: resp.id
         };
-        this.noteService.doCollab(collaboratedUser).subscribe((resp) => {
+// tslint:disable-next-line: no-shadowed-variable
+        this.noteService.doCollab(collaboratedUser).subscribe((resp: any) => {
           console.log(resp);
           this.snackBar.open('added successfully', 'Ok', {
             duration: 2000,
@@ -87,10 +91,9 @@ export class CollaboratorDialogBoxComponent implements OnInit {
     }
   }
 
-  public deleteCollab(email, note, collId) {
+  public deleteCollab(note, collId) {
     const collaboratedUser = {
       id: collId,
-      collEmailId: email,
       noteId: note.id
 
     };
@@ -115,12 +118,37 @@ export class CollaboratorDialogBoxComponent implements OnInit {
     });
   }
 
-  addUserEmail(option){
+  addUserEmail( option) {
     console.log('option ', option);
-    this.collaboratorArray.push(option.email);
-  
-     console.log('collaborator array---- ', this.collaboratorArray);
-    
+    console.log('users list ', this.users);
+    this.colArray.push(this.users);
+    console.log('this.colArray', this.colArray);
+    // for (let i = 0; i < this.colArray[0].length; i++) {
+    if (this.users.email === option.email) {
+      this.getCollaboraterId(option.email).subscribe((resp: any) => {
+        this.coUser = resp;
+        const collaboratedUser = {
+          collEmailId: option.email,
+
+          //  noteId: this.notes.id,
+          ownerId: resp.id
+        };
+// tslint:disable-next-line: no-shadowed-variable
+        this.noteService.doCollab(collaboratedUser).subscribe((resp) => {
+          console.log(resp);
+          this.snackBar.open('added successfully', 'Ok', {
+            duration: 2000,
+          });
+        }, (error) => {
+          console.log(error);
+        });
+      });
+    } else {
+      this.collaboratorArray.push(option.email);
+      console.log('collaborator array---- ', this.collaboratorArray);
+      this.snackBar.open('user already present', 'ok');
+    }
   }
- 
 }
+
+

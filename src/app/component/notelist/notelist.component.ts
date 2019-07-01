@@ -193,6 +193,7 @@ export class NotelistComponent implements OnInit {
   /*collaborator*/
   public onClickDialogBox(products): void {
     console.log('products ', products);
+    localStorage.setItem('noteId', products.id);
     const dialogRef = this.dialog.open(CollaboratorDialogBoxComponent, {
       width: '550px',
       data: products
