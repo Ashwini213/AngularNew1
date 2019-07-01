@@ -31,10 +31,10 @@ export interface DialogData {
 export class NotelistComponent implements OnInit {
 
   constructor(private httpUtil: HttputilService, private router: Router, private labelService: LabelService, private noteService: NoteService,
-              public dialog: MatDialog, private snackBar: MatSnackBar,
-              public dialogRef: MatDialogRef<NotelistComponent>,
-              @Inject(MAT_DIALOG_DATA) public data, private userService: UserService,
-              private sanitizer: DomSanitizer, private dataService: DataServiceService) { }
+    public dialog: MatDialog, private snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<NotelistComponent>,
+    @Inject(MAT_DIALOG_DATA) public data, private userService: UserService,
+    private sanitizer: DomSanitizer, private dataService: DataServiceService) { }
   @Input() products: Note;
   @Input() public viewChanged = false;
   @Input() search;
@@ -118,7 +118,7 @@ export class NotelistComponent implements OnInit {
     });
   }
 
-  public  readAll() {
+  public readAll() {
     this.noteService.getAll().subscribe((resp: any) => {
       this.products = resp;
     }, (error) => console.log(error));

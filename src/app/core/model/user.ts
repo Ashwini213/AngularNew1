@@ -4,6 +4,5 @@ export class User {
     'password': string;
     'email': string;
     'image': any;
-    'coEmailId': String;
-    'userId': number;
+    'id': number;
 }

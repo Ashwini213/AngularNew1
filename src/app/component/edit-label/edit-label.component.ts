@@ -17,8 +17,8 @@ export class EditLabelComponent implements OnInit {
   labelName: string;
 
   constructor(public dialog: MatDialog, private labelService: LabelService,
-    public dialogRef: MatDialogRef<EditLabelComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private labelservice: LabelService) { }
+              public dialogRef: MatDialogRef<EditLabelComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData, private labelservice: LabelService) { }
 
   public ngOnInit() {
   }

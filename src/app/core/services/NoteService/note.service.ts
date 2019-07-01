@@ -21,14 +21,14 @@ export class NoteService {
     const httpheaders = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'token': token
+        token: token
       })
     };
     return httpheaders;
   }
 
   public getAll(): Observable<any> {
-    var header = this.getHeader();
+    let header = this.getHeader();
     const token = localStorage.getItem('token');
     return this.httpUtil.get(this.API + '/notes/' + token, header);
 
@@ -37,27 +37,27 @@ export class NoteService {
   public save(note) {
     const token = localStorage.getItem('token');
 
-    var header = this.getHeader();
+    let header = this.getHeader();
     return this.httpUtil.postWithBody(this.API + '/note/' + token, note, header);
   }
 
   public delete(noteId) {
-    var header = this.getHeader();
+    let header = this.getHeader();
     return this.httpUtil.delete(this.API + '/note/' + noteId, header);
   }
 
   public updateNote(note, noteId) {
-    var token = localStorage.getItem('token');
+    let token = localStorage.getItem('token');
     return this.httpUtil.put(this.API + '/note/' + token, note, {});
   }
 
   public doCollab(collabUser): Observable<any> {
-    var token = localStorage.getItem('token');
+    let token = localStorage.getItem('token');
     return this.httpUtil.put(this.API + '/add-collabarator/' + token, collabUser, {});
   }
 
   public removeCollab(collabUser) {
-    var token = localStorage.getItem('token');
+    let token = localStorage.getItem('token');
     return this.httpUtil.put(this.API + '/remove-collabarator/' + token, collabUser, {});
   }
 

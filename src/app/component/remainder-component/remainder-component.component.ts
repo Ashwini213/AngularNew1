@@ -11,9 +11,9 @@ import { NoteService } from 'src/app/core/services/NoteService/note.service';
 export class RemainderComponentComponent implements OnInit {
   note: Note;
   constructor(public dialog: MatDialog,
-              public dialogRef: MatDialogRef<RemainderComponentComponent>, private noteService: NoteService,
-              @Inject(MAT_DIALOG_DATA) public data,
-              private snackBar: MatSnackBar) { }
+    public dialogRef: MatDialogRef<RemainderComponentComponent>, private noteService: NoteService,
+    @Inject(MAT_DIALOG_DATA) public data,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
   }

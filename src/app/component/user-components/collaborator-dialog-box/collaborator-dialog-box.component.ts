@@ -74,7 +74,7 @@ export class CollaboratorDialogBoxComponent implements OnInit {
           noteId: note.id,
           ownerId: resp.id
         };
-// tslint:disable-next-line: no-shadowed-variable
+        // tslint:disable-next-line: no-shadowed-variable
         this.noteService.doCollab(collaboratedUser).subscribe((resp: any) => {
           console.log(resp);
           this.snackBar.open('added successfully', 'Ok', {
@@ -118,22 +118,21 @@ export class CollaboratorDialogBoxComponent implements OnInit {
     });
   }
 
-  addUserEmail( option) {
+  addUserEmail(option) {
     console.log('option ', option);
     console.log('users list ', this.users);
     this.colArray.push(this.users);
     console.log('this.colArray', this.colArray);
     // for (let i = 0; i < this.colArray[0].length; i++) {
-    if (this.users.email === option.email) {
+    if (this.users.email !== option.email) {
       this.getCollaboraterId(option.email).subscribe((resp: any) => {
         this.coUser = resp;
-        const collaboratedUser = {
+        var collaboratedUser = {
           collEmailId: option.email,
-
-          //  noteId: this.notes.id,
-          ownerId: resp.id
+           noteId: this.data.noteId,
+          ownerId: this.data.userId,
+          allocatedId: resp.id
         };
-// tslint:disable-next-line: no-shadowed-variable
         this.noteService.doCollab(collaboratedUser).subscribe((resp) => {
           console.log(resp);
           this.snackBar.open('added successfully', 'Ok', {
@@ -149,6 +148,13 @@ export class CollaboratorDialogBoxComponent implements OnInit {
       this.snackBar.open('user already present', 'ok');
     }
   }
+  // addNewUserEmail(email) {
+
+  //   this.noteService.doCollab(this.collaboratedUser).subscribe((resp: any) => {
+  //     console.log(resp);
+  //     this.snackBar.open('added successfully', 'Ok', {
+  //       duration: 2000,
+  //     });
+  //   });
+  // }
 }
-
-

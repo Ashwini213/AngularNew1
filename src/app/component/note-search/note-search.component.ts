@@ -29,9 +29,9 @@ export class NoteSearchComponent implements OnInit {
   togle = false;
   colors: string[] = ColorPalets;
   constructor(public dialog: MatDialog, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<NoteSearchComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: DialogData,
-              private labelService: LabelService, private noteService: NoteService, private dataService: DataServiceService,
-              private service: NoteService) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private labelService: LabelService, private noteService: NoteService, private dataService: DataServiceService,
+    private service: NoteService) { }
 
   public ngOnInit() {
     this.dataService.currentMessage.subscribe(message => this.view = message);
@@ -58,7 +58,7 @@ export class NoteSearchComponent implements OnInit {
     }
   }
 
- public addColor(color, products) {
+  public addColor(color, products) {
     this.fillTheColor = color;
     products.colore = color;
     this.noteService.updateNote(products, products.id).subscribe(resp => {
@@ -147,8 +147,8 @@ export class NoteSearchComponent implements OnInit {
     });
   }
 
-   /*remainder dialog box*/
-   public openRemainder(products): void {
+  /*remainder dialog box*/
+  public openRemainder(products): void {
     const dialogRef = this.dialog.open(RemainderComponentComponent, {
       width: '550px',
       data: products

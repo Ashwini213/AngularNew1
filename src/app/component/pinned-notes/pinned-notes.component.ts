@@ -21,8 +21,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class PinnedNotesComponent implements OnInit {
 
   constructor(private service: NoteService,
-              private dialog: MatDialog, private snackBar: MatSnackBar, private data: DataServiceService,
-              private labelService: LabelService, private sanitizer: DomSanitizer) {
+    private dialog: MatDialog, private snackBar: MatSnackBar, private data: DataServiceService,
+    private labelService: LabelService, private sanitizer: DomSanitizer) {
   }
   @Input() products: Note;
   @Input() view: boolean;
@@ -70,7 +70,7 @@ export class PinnedNotesComponent implements OnInit {
 
   public onCloseUpdateNote(note) {
     this.service.updateNote(note, note.id);
-  
+
   }
 
   public changeColor(products) {
@@ -123,7 +123,7 @@ export class PinnedNotesComponent implements OnInit {
     this.refreshEvent.emit(products);
     this.readAll();
   }
-/*LabelAdd Dialog Box*/
+  /*LabelAdd Dialog Box*/
   public onClickDialog(products): void {
     const dialogRef = this.dialog.open(LabelDialogBoxComponent, {
       width: '550px',
@@ -132,7 +132,7 @@ export class PinnedNotesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       this.readAll();
     });
-   
+
   }
 
   public removeLabel(label, note) {

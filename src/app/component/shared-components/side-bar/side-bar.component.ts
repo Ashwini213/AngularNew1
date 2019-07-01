@@ -59,9 +59,9 @@ export class SideBarComponent implements OnInit, OnDestroy {
   public remainder() {
     this.noteService.getAll().subscribe(resp => {
       this.notelist = resp;
-      const result = this.notelist.filter(note => note.reminder!=null);
+      const result = this.notelist.filter(note => note.reminder != null);
       this.router.navigate(['home/pinned'], { state: { notes: result } });
-    })
+    });
   }
 }
 

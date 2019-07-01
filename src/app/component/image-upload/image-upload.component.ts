@@ -10,7 +10,7 @@ import { HttputilService } from 'src/app/httputil.service';
 })
 export class ImageUploadComponent {
   constructor(public router: Router, public httpUtil: HttputilService,
-    ) { }
+  ) { }
   selectedFile: File;
   user: User;
   fileToUpload: File;

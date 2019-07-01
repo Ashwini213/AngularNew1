@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
   };
 
   constructor(private userService: UserService,
-              public dataservice: DataServiceService, private sanitizer: DomSanitizer, private router: Router, private noteService: NoteService) { }
+    public dataservice: DataServiceService, private sanitizer: DomSanitizer, private router: Router, private noteService: NoteService) { }
 
   public ngOnInit() {
     this.readAll();
@@ -92,8 +92,8 @@ export class HomeComponent implements OnInit {
   }
 
   toggleView() {
-     this.view = !(this.view);
-     this.dataservice.changeMessage(this.view);
+    this.view = !(this.view);
+    this.dataservice.changeMessage(this.view);
   }
 
   public viewGrid() {

@@ -11,7 +11,7 @@ import { UserService } from 'src/app/core/services/UserService/user.service';
 export class ResetPasswordComponent implements OnInit {
   resetPasswordForm: FormGroup;
   constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, 
-    private router: Router,private userService: UserService) {
+    private router: Router, private userService: UserService) {
   }
   public id = this.activatedRoute.snapshot.params.id;
 
@@ -26,7 +26,7 @@ export class ResetPasswordComponent implements OnInit {
    * @description Getting password error message
    */
   public getPasswordErrorMessage() {
-    return this.password.hasError('required') ? "Can't be empty" :
+    return this.password.hasError('required') ? 'Can\'t be empty' :
       this.password.hasError('minlength') ? 'Minimum 6 characters' : 
         '';
   }
@@ -35,7 +35,7 @@ export class ResetPasswordComponent implements OnInit {
    * @description Getting confirm password error message
    */
   public getPasswordMatch() {
-      return this.repeatPassword.hasError('required') ? "'Can't be empty" :
+      return this.repeatPassword.hasError('required') ? '\'Can\'t be empty' :
         this.repeatPassword.hasError('minlength') ? 'Minimum 6 characters' :
          '';
   }
@@ -47,16 +47,16 @@ export class ResetPasswordComponent implements OnInit {
   public confirmPassword (password, repeatPassword) {
     console.log(password == repeatPassword);
     var tokenObject = {};
-    if(password == repeatPassword){
+    if (password == repeatPassword){
       this.activatedRoute.params.subscribe((params: Params) => {
         var token = params['token'];
         console.log(token);
         tokenObject = {
-          "token":token,
-          "password":password
+          'token': token,
+          'password': password
         }
       });
-      this.userService.resetPassword(tokenObject, 'reset').subscribe((data:any) => {
+      this.userService.resetPassword(tokenObject, 'reset').subscribe((data: any) => {
         console.log(data);
         this.router.navigate(['']);
       })
