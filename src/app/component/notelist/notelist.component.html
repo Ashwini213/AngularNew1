@@ -41,6 +41,22 @@
             <img [src]="transformImage(item)" height="20%" width="20%" style="float: left;"/>
     
           </div> -->
+
+        <!-- <mat-chip *ngFor="let Collaborator of products.collaborator" [removable]="removable" (removed)="onClickDialogBox(Collaborator,products)">
+            <mat-icon>person_add</mat-icon>
+            {{Collaborator.owenId}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip> -->
+
+        <mat-chip *ngIf="products.noteId" [removable]="removable" (removed)="onClickDialogBox(products)">
+          <mat-icon>person_add</mat-icon>
+
+          {{products.icons}}
+
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+
+
         <mat-chip *ngFor="let label of products.labelList" [removable]="removable"
           (removed)="removeLabel(label,products)">
           {{label.labelName}}

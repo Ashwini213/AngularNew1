@@ -31,10 +31,10 @@ export interface DialogData {
 export class NotelistComponent implements OnInit {
 
   constructor(private httpUtil: HttputilService, private router: Router, private labelService: LabelService, private noteService: NoteService,
-    public dialog: MatDialog, private snackBar: MatSnackBar,
-    public dialogRef: MatDialogRef<NotelistComponent>,
-    @Inject(MAT_DIALOG_DATA) public data, private userService: UserService,
-    private sanitizer: DomSanitizer, private dataService: DataServiceService) { }
+              public dialog: MatDialog, private snackBar: MatSnackBar,
+              public dialogRef: MatDialogRef<NotelistComponent>,
+              @Inject(MAT_DIALOG_DATA) public data, private userService: UserService,
+              private sanitizer: DomSanitizer, private dataService: DataServiceService) { }
   @Input() products: Note;
   @Input() public viewChanged = false;
   @Input() search;
@@ -54,7 +54,7 @@ export class NotelistComponent implements OnInit {
   fillTheColor;
   grid = false;
   colors: string[] = ColorPalets;
-  panelOpenState: boolean = false;
+  panelOpenState = false;
   submitted = false;
   discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
   title = new FormControl('', [Validators.required, Validators.minLength(1)]);
@@ -130,7 +130,7 @@ export class NotelistComponent implements OnInit {
   }
 
   public changeColor(products) {
-    var icon = document.getElementById(products.title);
+    let icon = document.getElementById(products.title);
     this.togle = !this.togle;
     if (this.togle) {
       icon.style.background = 'black';
@@ -139,8 +139,7 @@ export class NotelistComponent implements OnInit {
       this.snackBar.open('Pinned', 'Ok', {
         duration: 2000,
       });
-    }
-    else {
+    } else {
       products.ispinned = false;
       icon.style.background = 'white';
       this.snackBar.open('Unpinned', 'Ok', {
@@ -251,7 +250,7 @@ export class NotelistComponent implements OnInit {
   onFileSelected(event, note) {
     note.image = event.target.files[0];
     this.imagePath = this.data.image;
-    var fd = new FormData();
+    let fd = new FormData();
     fd.append('file', event.target.files[0]);
     this.inputImage = true;
     this.noteService.uploadNoteImage(fd, note.id).subscribe(resp => {
